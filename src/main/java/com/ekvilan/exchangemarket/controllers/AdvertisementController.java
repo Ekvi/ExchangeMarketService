@@ -1,6 +1,8 @@
 package com.ekvilan.exchangemarket.controllers;
 
 import com.ekvilan.exchangemarket.models.Advertisement;
+import com.ekvilan.exchangemarket.services.AdvertisementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,19 +13,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/advertisement")
-public class JsonController {
+public class AdvertisementController {
+    @Autowired
+    private AdvertisementService service;
 
-    /*@RequestMapping("/{name}")
+
+    @RequestMapping("/{userId}")
     @ResponseBody
-    public User generateJsonResponse(@PathVariable("name") String name){
-        User user = new User(1001, name);
-        return user;
-    }*/
-
-    @RequestMapping("/userId")
-    @ResponseBody
-    public List<Advertisement> getOwnAdvertisements(@RequestBody String userId){
-
+    public List<Advertisement> getOwnAdvertisements(@PathVariable("userId") String userId){
+        System.out.println(userId);
         return null;
     }
 
@@ -43,8 +41,7 @@ public class JsonController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public List<Advertisement> addAdvertisements(@RequestBody String params){
-
-        return null;
+    public void addAdvertisement(@RequestBody Advertisement advertisement/*Person person*/){
+        service.save(advertisement);
     }
 }

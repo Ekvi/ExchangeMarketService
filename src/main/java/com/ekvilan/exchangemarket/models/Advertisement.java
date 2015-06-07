@@ -1,37 +1,39 @@
 package com.ekvilan.exchangemarket.models;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
-@Table(name = "advertisement")
+@Table(name = "advertisements")
 public class Advertisement {
     @Id
     @GeneratedValue
     private long id;
-    @Column
+    @Column(name = "user_id")
     private String userId;
-    @Column
+    @Column(name = "user_city")
+    private String city;
+    @Column(name = "action_user_choice")
     private String action;
-    @Column
+    @Column(name = "currency_user_choice")
     private String currency;
-    @Column
+    @Column(name = "summa")
     private int sum;
     @Column
     private double rate;
     @Column(name = "user_phone")
     private String phone;
-    @Column(name = "user_city")
-    private String city;
     @Column(name = "user_area")
     private String area;
     @Column(name = "user_comment")
     private String comment;
-    @Column
-    private Date date;
+    @Column(name = "publish_date")
+    private String date;
+
+    public Advertisement(){}
 
     public Advertisement(String userId, String action, String currency, int sum, double rate, String phone,
-                         String city, String area, String comment, Date date) {
+                         String city, String area, String comment, String date) {
         this.userId = userId;
         this.action = action;
         this.currency = currency;
@@ -124,11 +126,11 @@ public class Advertisement {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
