@@ -11,7 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -33,5 +35,30 @@ public class TestAdvertisementDao {
 
         assertNotNull(actual);
         assertEquals("test@gmail.com", actual.getUserId());
+    }
+
+    @Test
+    public void testGetListWithOneActionAndCurrency() {
+        List<String> actions = new ArrayList<String>();
+        actions.add("купить");
+        List<String> currencies = new ArrayList<String>();
+        currencies.add("евро");
+
+        List<Advertisement> ads = service.getAdvertisements("киев", actions, currencies);
+
+        assertTrue(!ads.isEmpty());
+    }
+
+    @Test
+    public void testGetListWithManyActionsAndCurrencies() {
+        List<String> actions = new ArrayList<String>();
+        actions.add("купить"); actions.add("продать");
+
+        List<String> currencies = new ArrayList<String>();
+        currencies.add("евро"); currencies.add("доллар");
+
+        List<Advertisement> ads = service.getAdvertisements("киев", actions, currencies);
+
+        assertTrue(ads.size() > 0);
     }
 }

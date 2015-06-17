@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -21,5 +23,10 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public Advertisement get(String name, Object value) {
         return advertisementDao.get(name, value);
+    }
+
+    @Override
+    public List<Advertisement> getAdvertisements(String city, List<String> actions, List<String> currencies) {
+        return advertisementDao.getList(city, actions, currencies);
     }
 }

@@ -1,6 +1,7 @@
 package com.ekvilan.exchangemarket.controllers;
 
 import com.ekvilan.exchangemarket.SpringTestConfiguration;
+import com.ekvilan.exchangemarket.controllers.models.RequestInfo;
 import com.ekvilan.exchangemarket.models.Advertisement;
 import com.ekvilan.exchangemarket.services.AdvertisementService;
 import org.junit.Test;
@@ -10,10 +11,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,5 +38,19 @@ public class TestAdvertisementController {
 
         assertNotNull(actual);
         assertEquals("test@gmail.com", actual.getUserId());
+    }
+
+    @Test
+    public void testGetAdvertisements() {
+        List<String> actions = new ArrayList<String>();
+        actions.add("купить"); actions.add("продать");
+
+        List<String> currencies = new ArrayList<String>();
+        currencies.add("евро"); currencies.add("доллар");
+
+        List<Advertisement> ads = controller.getAdvertisements(new RequestInfo("одесса", actions, currencies));
+
+        assertNotNull(ads);
+        assertTrue(ads.size() > 0);
     }
 }

@@ -1,10 +1,10 @@
 package com.ekvilan.exchangemarket.controllers;
 
 import com.ekvilan.exchangemarket.models.Advertisement;
+import com.ekvilan.exchangemarket.controllers.models.RequestInfo;
 import com.ekvilan.exchangemarket.services.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,12 +18,12 @@ public class AdvertisementController {
     private AdvertisementService service;
 
 
-    @RequestMapping("/{userId}")
+    /*@RequestMapping("/{userId}")
     @ResponseBody
     public List<Advertisement> getOwnAdvertisements(@PathVariable("userId") String userId){
         System.out.println(userId);
         return null;
-    }
+    }*/
 
     @RequestMapping("/all")
     @ResponseBody
@@ -34,14 +34,13 @@ public class AdvertisementController {
 
     @RequestMapping("/get")
     @ResponseBody
-    public List<Advertisement> getAdvertisements(@RequestBody String params){
-
-        return null;
+    public List<Advertisement> getAdvertisements(@RequestBody RequestInfo params){
+        return service.getAdvertisements(params.getCity(), params.getActions(), params.getCurrencies());
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public void addAdvertisement(@RequestBody Advertisement advertisement/*Person person*/){
+    public void addAdvertisement(@RequestBody Advertisement advertisement){
         service.save(advertisement);
     }
 }
