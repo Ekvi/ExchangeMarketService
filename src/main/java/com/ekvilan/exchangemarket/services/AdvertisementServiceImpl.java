@@ -34,4 +34,9 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public List<Advertisement> getAdvertisements(String userId) {
         return advertisementDao.getList("userId", userId);
     }
+
+    @Override
+    public void remove(long id) {
+        advertisementDao.remove("id", id);
+    }
 }

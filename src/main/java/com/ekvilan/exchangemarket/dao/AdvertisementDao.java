@@ -3,6 +3,7 @@ package com.ekvilan.exchangemarket.dao;
 import com.ekvilan.exchangemarket.models.Advertisement;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +33,16 @@ public class AdvertisementDao extends AbstractHibernateDAO<Advertisement> {
             currencyDisjunction.add(Restrictions.eq("currency", currency));
         }
         criteria.add(currencyDisjunction);
+        criteria.addOrder(Order.desc("id"));
 
         return criteria.list();
+    }
+
+    @Override
+    public List<Advertisement> getList(String property, Object value) {
+        return criteria()
+                .add(Restrictions.eq(property, value))
+                .addOrder(Order.desc("id"))
+                .list();
     }
 }

@@ -8,4 +8,5 @@ public interface BasicCrudDao<E> {
     List<E> getAll();
     E get(String property, Object value);
     List<E> getList(String property, Object value);
+    void remove(String entity, Object value);
 }

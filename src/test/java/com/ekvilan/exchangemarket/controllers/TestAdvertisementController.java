@@ -15,9 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,5 +58,15 @@ public class TestAdvertisementController {
 
         assertNotNull(ads);
         assertTrue(ads.size() > 0);
+    }
+
+    @Test
+    @Transactional
+    public void testRemoveAdvertisement() {
+        assertNotNull(service.get("id", 23L));
+
+        controller.removeAdvertisement("\"id\":\"23\"");
+
+        assertNull(service.get("id", 23L));
     }
 }

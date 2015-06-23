@@ -5,7 +5,6 @@ import com.ekvilan.exchangemarket.controllers.models.RequestInfo;
 import com.ekvilan.exchangemarket.services.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,20 +17,6 @@ public class AdvertisementController {
     @Autowired
     private AdvertisementService service;
 
-
-    /*@RequestMapping("/{userId}")
-    @ResponseBody
-    public List<Advertisement> getOwnAdvertisements(@PathVariable("userId") String userId){
-        System.out.println(userId);
-        return null;
-    }*/
-
-    @RequestMapping("/all")
-    @ResponseBody
-    public List<Advertisement> getAllAdvertisements(){
-
-        return null;
-    }
 
     @RequestMapping("/get")
     @ResponseBody
@@ -49,6 +34,12 @@ public class AdvertisementController {
     @ResponseBody
     public void addAdvertisement(@RequestBody Advertisement advertisement){
         service.save(advertisement);
+    }
+
+    @RequestMapping("/remove")
+    @ResponseBody
+    public void removeAdvertisement(@RequestBody String id){
+        service.remove(Long.parseLong(extractValue(id)));
     }
 
     private String extractValue(String content) {

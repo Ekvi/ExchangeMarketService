@@ -1,6 +1,5 @@
 package com.ekvilan.exchangemarket.dao;
 
-import com.ekvilan.exchangemarket.models.Advertisement;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,15 +47,6 @@ public abstract class AbstractHibernateDAO<E> implements BasicCrudDao<E> {
                 .uniqueResult();
     }
 
-    /*@Override
-    public E get(String property, Object value, String property2, Object value2) {
-        Criteria criteria = criteria();
-        criteria.add(Restrictions.eq(property, value));
-        criteria.add(Restrictions.eq(property2, value2));
-
-        return (E)criteria.uniqueResult();
-    }*/
-
     @Override
     public List<E> getList(String property, Object value) {
         return criteria()
@@ -64,4 +54,9 @@ public abstract class AbstractHibernateDAO<E> implements BasicCrudDao<E> {
                 .list();
     }
 
+    @Override
+    public void remove(String property, Object value) {
+        E entity = get(property, value);
+        currentSession().delete(entity);
+    }
 }
