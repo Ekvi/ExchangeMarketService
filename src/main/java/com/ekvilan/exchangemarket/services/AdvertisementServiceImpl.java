@@ -29,4 +29,9 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public List<Advertisement> getAdvertisements(String city, List<String> actions, List<String> currencies) {
         return advertisementDao.getList(city, actions, currencies);
     }
+
+    @Override
+    public List<Advertisement> getAdvertisements(String userId) {
+        return advertisementDao.getList("userId", userId);
+    }
 }

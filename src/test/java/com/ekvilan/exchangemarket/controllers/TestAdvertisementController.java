@@ -53,4 +53,12 @@ public class TestAdvertisementController {
         assertNotNull(ads);
         assertTrue(ads.size() > 0);
     }
+
+    @Test
+    public void testGetOwnAdvertisements() {
+        List<Advertisement> ads = controller.getOwnAdvertisements("\"userId\":\"dmitrii.shribak@gmail.com\"");
+
+        assertNotNull(ads);
+        assertTrue(ads.size() > 0);
+    }
 }
