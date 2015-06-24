@@ -32,8 +32,9 @@ public class Advertisement {
 
     public Advertisement(){}
 
-    public Advertisement(String userId, String action, String currency, int sum, double rate, String phone,
+    public Advertisement(long id, String userId, String action, String currency, int sum, double rate, String phone,
                          String city, String area, String comment, String date) {
+        this.id = id;
         this.userId = userId;
         this.action = action;
         this.currency = currency;

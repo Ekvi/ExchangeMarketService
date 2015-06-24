@@ -29,7 +29,7 @@ public class TestAdvertisementController {
     @Test
     @Transactional
     public void testAddAdvertisement() {
-        controller.addAdvertisement(new Advertisement("test@gmail.com", "продажа", "usd", 200, 20.2,
+        controller.addAdvertisement(new Advertisement(45, "test@gmail.com", "продажа", "usd", 200, 20.2,
                 "Odessa", "80971234543", null, null, new Date().toString()));
 
         Advertisement actual = service.get("userId","test@gmail.com");
