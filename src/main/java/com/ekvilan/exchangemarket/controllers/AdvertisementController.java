@@ -17,7 +17,6 @@ public class AdvertisementController {
     @Autowired
     private AdvertisementService service;
 
-
     @RequestMapping("/get")
     @ResponseBody
     public List<Advertisement> getAdvertisements(@RequestBody RequestInfo params){
@@ -38,7 +37,7 @@ public class AdvertisementController {
 
     @RequestMapping("/remove")
     @ResponseBody
-    public void removeAdvertisement(@RequestBody String id){
+    public void removeAdvertisement(@RequestBody String id) {
         service.remove(Long.parseLong(extractValue(id)));
     }
 

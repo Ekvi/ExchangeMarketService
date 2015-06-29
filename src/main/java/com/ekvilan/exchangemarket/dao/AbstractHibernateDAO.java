@@ -57,6 +57,8 @@ public abstract class AbstractHibernateDAO<E> implements BasicCrudDao<E> {
     @Override
     public void remove(String property, Object value) {
         E entity = get(property, value);
-        currentSession().delete(entity);
+        if(entity != null) {
+            currentSession().delete(entity);
+        }
     }
 }
