@@ -32,19 +32,26 @@ public class Advertisement {
 
     public Advertisement(){}
 
-    public Advertisement(long id, String userId, String action, String currency, int sum, double rate, String phone,
-                         String city, String area, String comment, String date) {
-        this.id = id;
+    public Advertisement(String userId, String city, String action, String currency, int sum,
+                         double rate, String phone, String area, String comment, String date) {
         this.userId = userId;
+        this.city = city;
         this.action = action;
         this.currency = currency;
         this.sum = sum;
         this.rate = rate;
         this.phone = phone;
-        this.city = city;
         this.area = area;
         this.comment = comment;
         this.date = date;
+    }
+
+    public Advertisement(long id, String userId, String city, String action,
+                         String currency, int sum, double rate, String phone,
+                         String area, String comment, String date) {
+
+        this(userId, city, action, currency, sum, rate, phone, area, comment, date);
+        this.id = id;
     }
 
     public long getId() {
