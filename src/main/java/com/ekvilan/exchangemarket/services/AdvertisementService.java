@@ -11,4 +11,5 @@ public interface AdvertisementService {
     public List<Advertisement> getAdvertisements(String city, List<String> actions, List<String> currencies);
     public List<Advertisement> getAdvertisements(String userId);
     public void remove(long id);
+    public void update(List<Advertisement> removeAds, List<Advertisement> newAds);
 }

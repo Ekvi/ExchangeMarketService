@@ -23,9 +23,10 @@ public class FinanceIUaParser {
     private final String USER_AGENT = "OPR/26.0.1656.60 Chrome/33.0.1750.154";
     private final String BUY = "?type=1";
 
-    private List<Advertisement> removeAds = new ArrayList<Advertisement>();
+    private List<Advertisement> removeAds;
     private List<Link> links = new ArrayList<Link>();
     private Link link;
+    private String userAction;
 
     public FinanceIUaParser() {
         initLinks();
@@ -91,6 +92,7 @@ public class FinanceIUaParser {
     public List<Advertisement> parseAdvertisements(Link link, String action) {
         List<Advertisement> advertisements = new ArrayList<Advertisement>();
         this.link = link;
+        this.userAction = action;
 
         try {
             Document doc = Jsoup.connect(link.getLink() + action).userAgent(USER_AGENT).timeout(30000).get();
@@ -109,6 +111,7 @@ public class FinanceIUaParser {
 
     private List<Advertisement> extractData(Element table) {
         List<Advertisement> advertisements = new ArrayList<Advertisement>();
+        List<Advertisement> invalidAds = new ArrayList<Advertisement>();
 
         Elements trTags = table.getElementsByTag("tr");
 
@@ -124,9 +127,11 @@ public class FinanceIUaParser {
                 if (checkDate(advertisement.getDate()) > 0) {
                     advertisement.setDate(dateUtils.getYesterdayDate(advertisement.getDate()));
                 }
-                removeAds.add(advertisement);
+                invalidAds.add(advertisement);
             }
         }
+
+        removeAds = new ArrayList<Advertisement>(invalidAds);
 
         return advertisements;
     }
@@ -138,7 +143,7 @@ public class FinanceIUaParser {
         String phone = elements.get(AdvertisementIndex.PHONE_INDEX.getValue()).text();
         String area = elements.get(AdvertisementIndex.AREA_INDEX.getValue()).text();
         String comment = elements.get(AdvertisementIndex.COMMENT_INDEX.getValue()).text();
-        String action = link.getLink().endsWith(BUY) ? "купить" : "продать";
+        String action = userAction.equals(BUY) ? "купить" : "продать";
         int sum;
 
         try {
@@ -185,5 +190,9 @@ public class FinanceIUaParser {
 
     public List<Advertisement> getRemoveAds() {
         return removeAds;
+    }
+
+    public List<Link> getLinks() {
+        return links;
     }
 }

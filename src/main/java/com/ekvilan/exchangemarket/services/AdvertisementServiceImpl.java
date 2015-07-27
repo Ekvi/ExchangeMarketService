@@ -39,4 +39,10 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public void remove(long id) {
         advertisementDao.remove("id", id);
     }
+
+    @Override
+    public void update(List<Advertisement> removeAds, List<Advertisement> newAds) {
+        advertisementDao.remove(removeAds);
+        advertisementDao.save(newAds);
+    }
 }
