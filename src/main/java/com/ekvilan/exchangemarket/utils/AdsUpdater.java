@@ -4,6 +4,7 @@ package com.ekvilan.exchangemarket.utils;
 import com.ekvilan.exchangemarket.models.Advertisement;
 import com.ekvilan.exchangemarket.models.Link;
 import com.ekvilan.exchangemarket.services.AdvertisementService;
+import com.ekvilan.exchangemarket.services.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,17 +17,19 @@ public class AdsUpdater {
     private FinanceIUaParser parser;
     @Autowired
     private AdvertisementService advertisementService;
+    @Autowired
+    private LinkService linkService;
 
     private final String BUY = "?type=1";
     private final String SALE = "?type=2";
 
 
-    @Scheduled(cron="0 0/30 * * * *")
+    @Scheduled(cron="0 0/15 * * * *")
     public void update() {
         List<Advertisement> fromDb = advertisementService.getAdvertisements("finance.i.ua");
         List<Advertisement> newAds = new ArrayList<Advertisement>();
         List<Advertisement> removeAds = new ArrayList<Advertisement>();
-        List<Link> links = parser.getLinks();
+        List<Link> links = linkService.getLinks();
 
         for(Link link : links) {
             newAds.addAll(parser.parseAdvertisements(link, BUY));

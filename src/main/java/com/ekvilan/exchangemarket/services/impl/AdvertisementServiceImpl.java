@@ -1,7 +1,8 @@
-package com.ekvilan.exchangemarket.services;
+package com.ekvilan.exchangemarket.services.impl;
 
 import com.ekvilan.exchangemarket.dao.AdvertisementDao;
 import com.ekvilan.exchangemarket.models.Advertisement;
+import com.ekvilan.exchangemarket.services.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

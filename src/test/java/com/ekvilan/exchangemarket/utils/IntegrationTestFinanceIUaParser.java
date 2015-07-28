@@ -22,7 +22,7 @@ public class IntegrationTestFinanceIUaParser {
 
     @Test
     public void testParseAdvertisements() {
-        Link link = new Link("Одесса", "http://finance.i.ua/market/odessa/");
+        Link link = new Link("http://finance.i.ua", "Одесса", "http://finance.i.ua/market/odessa/");
         String action = "?type=1";
         List<Advertisement> newAds = parser.parseAdvertisements(link, action);
         List<Advertisement> removeAds = parser.getRemoveAds();

@@ -17,7 +17,7 @@ public class RatesExtractor {
     private final String URL = "http://minfin.com.ua/currency/";
     private final String REPLACE= "<td>";
     private final String bankRegExp = ".+В банках.*\\n(.*\\d).*\\n(.*\\d)";
-    private final String marketRegExp = ".*Рыночный.*\\n(.*\\d).*\\n(.*\\d)";
+    private final String marketRegExp = ".*Черный рынок.*\\n(.*\\d).*\\n(.*\\d)";
     private final String nbuRegExp = ".+НБУ.+\\n.+\\n(.+\\d)";
 
     private final String[] currencies = {"USD", "EUR", "RUB"};
