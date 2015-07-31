@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Component
@@ -112,7 +110,10 @@ public class FinanceIUaParser {
 
     private int checkDate(String date) {
         String[] splitDate = date.split(" ");
-        String[] splitNow = new Date().toString().split(" ");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 7);
+        String[] splitNow = calendar.getTime().toString().split(" ");
 
         return splitDate[splitDate.length - 1].compareTo(splitNow[3]);
     }

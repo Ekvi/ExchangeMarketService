@@ -24,7 +24,7 @@ public class AdsUpdater {
     private final String SALE = "?type=2";
 
 
-    @Scheduled(cron="0 0/15 * * * *")
+    @Scheduled(cron="0 0/30 * * * *")
     public void update() {
         List<Advertisement> fromDb = advertisementService.getAdvertisements("finance.i.ua");
         List<Advertisement> newAds = new ArrayList<Advertisement>();

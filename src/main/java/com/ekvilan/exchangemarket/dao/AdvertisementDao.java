@@ -34,7 +34,7 @@ public class AdvertisementDao extends AbstractHibernateDAO<Advertisement> {
             currencyDisjunction.add(eq("currency", currency));
         }
         criteria.add(currencyDisjunction);
-        criteria.addOrder(Order.desc("id"));
+        criteria.addOrder(Order.desc("date"));
 
         return criteria.list();
     }
@@ -43,7 +43,7 @@ public class AdvertisementDao extends AbstractHibernateDAO<Advertisement> {
     public List<Advertisement> getList(String property, Object value) {
         return criteria()
                 .add(eq(property, value))
-                .addOrder(Order.desc("id"))
+                .addOrder(Order.desc("date"))
                 .list();
     }
 
